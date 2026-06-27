@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses | SMS</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/dashboard.css"/>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><span class="college-short">SGDTPC</span><span class="college-full">Student Management</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="students.html" class="nav-item"><span class="nav-icon">👨‍🎓</span> Students</a>
+        <a href="courses.html" class="nav-item active"><span class="nav-icon">📚</span> Courses</a>
+        <a href="attendance.html" class="nav-item"><span class="nav-icon">📋</span> Attendance</a>
+        <a href="marks.html" class="nav-item"><span class="nav-icon">📝</span> Marks & Results</a>
+        <a href="fees.html" class="nav-item"><span class="nav-icon">💰</span> Fee Management</a>
+        <a href="faculty.html" class="nav-item"><span class="nav-icon">👩‍🏫</span> Faculty</a>
+        <a href="reports.html" class="nav-item"><span class="nav-icon">📈</span> Reports</a>
+      </nav>
+      <div class="sidebar-footer"><button onclick="logout()" class="btn-logout">🚪 Logout</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left"><button class="hamburger" onclick="toggleSidebar()">☰</button><h2>Courses & Branches</h2></div>
+        <div class="topbar-right"><span id="userDisplay" class="user-badge"></span></div>
+      </header>
+      <div class="page-body">
+        <div class="page-actions">
+          <div></div>
+          <button class="btn-primary" onclick="openCourseModal()">+ Add Course</button>
+        </div>
+        <div class="courses-grid" id="coursesGrid"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="courseModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header"><h3 id="courseModalTitle">Add Course</h3><button class="modal-close" onclick="closeCourseModal()">✕</button></div>
+      <form id="courseForm" class="modal-form">
+        <input type="hidden" id="courseId"/>
+        <div class="form-group"><label>Course / Branch Name *</label><input type="text" id="cName" required/></div>
+        <div class="form-row">
+          <div class="form-group"><label>Duration</label><input type="text" id="cDuration" placeholder="e.g. 3 Years"/></div>
+          <div class="form-group"><label>Total Intake</label><input type="number" id="cIntake" placeholder="e.g. 60"/></div>
+        </div>
+        <div class="form-group"><label>Description</label><textarea id="cDesc" rows="3"></textarea></div>
+        <div class="form-group"><label>Annual Fee (₹)</label><input type="number" id="cFee"/></div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeCourseModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/courses.js"></script>
+</body>
+</html>

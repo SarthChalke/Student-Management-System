@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reports | SMS</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/dashboard.css"/>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><span class="college-short">SGDTPC</span><span class="college-full">Student Management</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="students.html" class="nav-item"><span class="nav-icon">👨‍🎓</span> Students</a>
+        <a href="courses.html" class="nav-item"><span class="nav-icon">📚</span> Courses</a>
+        <a href="attendance.html" class="nav-item"><span class="nav-icon">📋</span> Attendance</a>
+        <a href="marks.html" class="nav-item"><span class="nav-icon">📝</span> Marks & Results</a>
+        <a href="fees.html" class="nav-item"><span class="nav-icon">💰</span> Fee Management</a>
+        <a href="faculty.html" class="nav-item"><span class="nav-icon">👩‍🏫</span> Faculty</a>
+        <a href="reports.html" class="nav-item active"><span class="nav-icon">📈</span> Reports</a>
+      </nav>
+      <div class="sidebar-footer"><button onclick="logout()" class="btn-logout">🚪 Logout</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left"><button class="hamburger" onclick="toggleSidebar()">☰</button><h2>Reports</h2></div>
+        <div class="topbar-right"><span id="userDisplay" class="user-badge"></span></div>
+      </header>
+      <div class="page-body">
+        <div class="reports-grid">
+          <div class="report-card" onclick="generateReport('students')">
+            <div class="report-icon">👨‍🎓</div>
+            <h3>Student List Report</h3>
+            <p>Complete list of all enrolled students with branch-wise summary</p>
+            <button class="btn-primary">Generate</button>
+          </div>
+          <div class="report-card" onclick="generateReport('attendance')">
+            <div class="report-icon">📋</div>
+            <h3>Attendance Report</h3>
+            <p>Branch-wise and student-wise attendance summary</p>
+            <button class="btn-primary">Generate</button>
+          </div>
+          <div class="report-card" onclick="generateReport('marks')">
+            <div class="report-icon">📝</div>
+            <h3>Results Report</h3>
+            <p>Semester-wise marks and pass/fail statistics</p>
+            <button class="btn-primary">Generate</button>
+          </div>
+          <div class="report-card" onclick="generateReport('fees')">
+            <div class="report-icon">💰</div>
+            <h3>Fee Collection Report</h3>
+            <p>Fee collected, pending and defaulter list</p>
+            <button class="btn-primary">Generate</button>
+          </div>
+          <div class="report-card" onclick="generateReport('faculty')">
+            <div class="report-icon">👩‍🏫</div>
+            <h3>Faculty Report</h3>
+            <p>Department-wise faculty list and details</p>
+            <button class="btn-primary">Generate</button>
+          </div>
+          <div class="report-card" onclick="generateReport('summary')">
+            <div class="report-icon">📊</div>
+            <h3>College Summary</h3>
+            <p>Overall statistics and key metrics of the college</p>
+            <button class="btn-primary">Generate</button>
+          </div>
+        </div>
+
+        <div id="reportOutput" class="card mt-4" style="display:none;">
+          <div class="card-header">
+            <h3 id="reportTitle">Report</h3>
+            <button class="btn-secondary" onclick="window.print()">🖨️ Print</button>
+          </div>
+          <div id="reportContent"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../js/db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/reports.js"></script>
+</body>
+</html>

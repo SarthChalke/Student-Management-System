@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Students | SMS</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/dashboard.css"/>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><span class="college-short">SGDTPC</span><span class="college-full">Student Management</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="students.html" class="nav-item active"><span class="nav-icon">👨‍🎓</span> Students</a>
+        <a href="courses.html" class="nav-item"><span class="nav-icon">📚</span> Courses</a>
+        <a href="attendance.html" class="nav-item"><span class="nav-icon">📋</span> Attendance</a>
+        <a href="marks.html" class="nav-item"><span class="nav-icon">📝</span> Marks & Results</a>
+        <a href="fees.html" class="nav-item"><span class="nav-icon">💰</span> Fee Management</a>
+        <a href="faculty.html" class="nav-item"><span class="nav-icon">👩‍🏫</span> Faculty</a>
+        <a href="reports.html" class="nav-item"><span class="nav-icon">📈</span> Reports</a>
+      </nav>
+      <div class="sidebar-footer"><button onclick="logout()" class="btn-logout">🚪 Logout</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left"><button class="hamburger" onclick="toggleSidebar()">☰</button><h2>Student Management</h2></div>
+        <div class="topbar-right"><span id="userDisplay" class="user-badge"></span></div>
+      </header>
+      <div class="page-body">
+        <div class="page-actions">
+          <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by name, ID, branch..." oninput="filterStudents()"/>
+          </div>
+          <div class="filter-group">
+            <select id="filterBranch" onchange="filterStudents()">
+              <option value="">All Branches</option>
+              <option value="Civil Engineering">Civil Engineering</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+              <option value="Electrical Engineering">Electrical Engineering</option>
+              <option value="Computer Engineering">Computer Engineering</option>
+              <option value="Chemical Engineering">Chemical Engineering</option>
+            </select>
+            <select id="filterYear" onchange="filterStudents()">
+              <option value="">All Years</option>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="openModal()">+ Add Student</button>
+        </div>
+
+        <div class="card">
+          <table class="data-table" id="studentsTable">
+            <thead>
+              <tr>
+                <th>Roll No</th><th>Enrollment No</th><th>Name</th><th>Branch</th><th>Year</th>
+                <th>Contact</th><th>Email</th><th>Fee Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="studentTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Student Modal -->
+  <div id="studentModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Student</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <form id="studentForm" class="modal-form">
+        <input type="hidden" id="studentId"/>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name *</label><input type="text" id="sName" required/></div>
+          <div class="form-group">
+    <label>Enrollment Number</label>
+    <input type="text" id="sEnrollment" required>
+</div>
+          <div class="form-group"><label>Roll Number *</label><input type="text" id="sRoll" required/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Branch *</label>
+            <select id="sBranch" required>
+              <option value="">Select Branch</option>
+              <option>Civil Engineering</option>
+              <option>Mechanical Engineering</option>
+              <option>Electrical Engineering</option>
+              <option>Computer Engineering</option>
+              <option>Electronics & Telecom</option>
+              <option>Chemical Engineering</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Year *</label>
+            <select id="sYear" required><option value="">Select Year</option><option value="1">1st Year</option><option value="2">2nd Year</option><option value="3">3rd Year</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Date of Birth</label><input type="date" id="sDob"/></div>
+          <div class="form-group"><label>Gender</label>
+            <select id="sGender"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Contact Number</label><input type="tel" id="sContact"/></div>
+          <div class="form-group"><label>Email</label><input type="email" id="sEmail"/></div>
+        </div>
+        <div class="form-group"><label>Address</label><textarea id="sAddress" rows="2"></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label>Parent/Guardian Name</label><input type="text" id="sParent"/></div>
+          <div class="form-group"><label>Parent Contact</label><input type="tel" id="sParentContact"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Fee Status</label>
+            <select id="sFeeStatus"><option value="Paid">Paid</option><option value="Pending">Pending</option><option value="Partial">Partial</option></select>
+          </div>
+          <div class="form-group"><label>Admission Date</label><input type="date" id="sAdmDate"/></div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/students.js"></script>
+</body>
+</html>
