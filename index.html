@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SMS | Smt. Geeta D. Tatkare Polytechnic College</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/login.css"/>
+</head>
+<body class="login-page">
+  <div class="login-wrapper">
+    <div class="login-left">
+      <div class="college-brand">
+        <div class="college-logo">🎓</div>
+        <h1>Smt. Geeta D. Tatkare<br/>Polytechnic College</h1>
+        <p>Student Management System</p>
+        <div class="tagline">Empowering Education · Enabling Excellence</div>
+      </div>
+    </div>
+    <div class="login-right">
+      <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p class="login-sub">Sign in to access the Student Management Portal</p>
+        <form id="loginForm">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="loginUser" placeholder="Enter username" required/>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPass" placeholder="Enter password" required/>
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <select id="loginRole">
+              <option value="admin">Admin</option>
+              <option value="faculty">Faculty</option>
+              <option value="student">Student</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary btn-full">Sign In</button>
+          <p id="loginError" class="error-msg"></p>
+        </form>
+        <div class="login-hint">
+          <small>Default: admin / admin123</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
